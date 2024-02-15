@@ -1,0 +1,7 @@
+<meta>
+<info name="admin info" />
+<script  src="validation.lua" type="server" />
+<script  src="position.lua" type="clinet" />
+<script  src="command.lua" type="server" />
+
+</meta>

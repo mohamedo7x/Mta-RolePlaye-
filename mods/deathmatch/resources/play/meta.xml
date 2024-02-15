@@ -1,0 +1,10 @@
+<meta>
+
+<script  src="g_panal.lua" type="client" />
+<script  src="validation.lua" type="client" />
+<script  src="utility.lua" type="client" />
+<script  src="s_login.lua" type="server" />
+<script  src="c_login.lua" type="client" />
+<script  src="server.lua" type="server" />
+
+</meta>
