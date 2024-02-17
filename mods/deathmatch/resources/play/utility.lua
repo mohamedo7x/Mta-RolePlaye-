@@ -1,9 +1,4 @@
-
-
-
-
-
-function getWindowPosistion(width, height) 
+function getWindowPosistion(width, height)
     local sw, sh = guiGetScreenSize()
 
     local x = (sw / 2) - (width / 2)
@@ -12,17 +7,15 @@ function getWindowPosistion(width, height)
     return x, y, width, height
 end
 
-
-
-function hideScreenCombonenet (status) 
+function hideScreenCombonenet(status)
     fadeCamera(true)
     if status == false or status == nil then
-    setPlayerHudComponentVisible("radar", false)
-    showChat(false)
-    showCursor(true , true)
-    else 
-    setPlayerHudComponentVisible("radar", true)
-    showChat(true)
-    showCursor(false)
+        setPlayerHudComponentVisible("radar", false)
+        showChat(false)
+        showCursor(true, true)
+    else
+        setPlayerHudComponentVisible("radar", true)
+        showChat(true)
+        showCursor(false)
     end
 end

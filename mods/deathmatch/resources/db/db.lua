@@ -6,7 +6,12 @@ local dbName = 'o7x'
 local dbPort = 3306
 
 addEventHandler('onResourceStart' , resourceRoot , function ()
-    db = dbConnect('mysql' , "dbname="..dbName.. ";host=" ..dbHost .. ';port'..dbPort , dbUser , dbPassword )
+    db = dbConnect('mysql' ,
+     "dbname="..dbName..
+     ";host=" ..dbHost .. 
+     ';port'..dbPort , dbUser , 
+     dbPassword )
+    outputServerLog('\n Server Connected Sucessfuly to MYSQL \n' .. 'Host: ' .. dbHost .. '\nUser: ' .. dbUser .. '\nName: ' .. dbName .. '\nPROT: ' .. dbPort)
 end)
 
 

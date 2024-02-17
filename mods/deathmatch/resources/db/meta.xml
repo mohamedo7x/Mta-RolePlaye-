@@ -2,5 +2,6 @@
 <info name="Database server" />
 
 <script  src="db.lua" type="server" />
+
 <export function= "getConnect" type="server"/>
 </meta>
