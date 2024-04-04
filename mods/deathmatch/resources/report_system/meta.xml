@@ -1,0 +1,6 @@
+<meta>
+
+<script src ="g_report.lua" type="client" />
+<script src ="s_report.lua" type="server" />
+
+</meta>
