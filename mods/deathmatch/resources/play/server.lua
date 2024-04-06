@@ -58,6 +58,7 @@ addEventHandler(
         --TODO : cechk if pass is correct if is correct login
         local password = passwordVerify(pass, result[1].password)
         if password == true then
+            dbExec(db , 'UPDATE accounts SET online = true WHERE username = ?' , username)
             collection[serial] = 0
             triggerClientEvent(client, "login:close", resourceRoot)
             spawnPlayer(client, result[1].x, result[1].y, result[1].z, 0, result[1].skin)
@@ -67,7 +68,7 @@ addEventHandler(
             fadeCamera(client, true)
             setCameraTarget(client)
             setElementData(client, "username", result[1].username)
-        else
+            else
             -- TODO : print it in login username is not exisit
             triggerClientEvent(client, "panal:error", resourceRoot, "USERNAME/PASSWORD")
 
@@ -121,10 +122,10 @@ addEventHandler(
 
 function createAccount(username, psdw, email, serial)
     local password = passwordHash(psdw, "bcrypt", {})
-    local skin = math.random(0, 70)
+    local skin = math.random(1, 70)
     dbExec(
         db,
-        "INSERT INTO accounts (username, password, email, serial, skin , x , y , z,rx , ry , rz) VALUES (?,?,?,?, ?, ?, ?, ? , ? , ? ,?)",
+        "INSERT INTO accounts (username, password, email, serial, skin , x , y , z,rx , ry , rz ,online) VALUES (?,?,?,?, ?, ?, ?, ? , ? , ? ,? , ?)",
         username,
         password,
         email,
@@ -135,25 +136,28 @@ function createAccount(username, psdw, email, serial)
         z,
         rx,
         ry,
-        rz
+        rz,
+        true
     )
-
+    addAccount(username , psdw )
     triggerClientEvent(client, "throw:okey", resourceRoot, "Sign Up Sucessfuly")
     local play = client
     setTimer(
         function()
+            
             triggerClientEvent(play, "register:close", resourceRoot)
             spawnPlayer(play, x, y, z + 1, 0, skin)
-            setElementRotation(play, rx, ry, rz)
-            setElementInterior(play, 0)
+            setElementRotation(play, rx or 0, ry or 0, rz or 0)
+            setElementInterior(play or 0, 0)
             setPlayerMoney(play, 500)
             fadeCamera(play, true)
             setCameraTarget(play)
-            setElementData(client, "username", username)
+            setElementData(play, "username", username)
         end,
         2000,
         1
     )
+    
 end
 
 addEvent("serailExisit", true)

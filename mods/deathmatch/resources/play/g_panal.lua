@@ -69,7 +69,7 @@ addEventHandler(
                 local email = guiGetText(config.emailInput)
                 local passwordOne = guiGetText(config.passwordInput)
                 local passwordtwo = guiGetText(config.passwordInpuTtwo)
-
+                
                 if not validUsername(tostring(username)) then
                     return guiSetVisible(usernameErrorLable, true)
                 else

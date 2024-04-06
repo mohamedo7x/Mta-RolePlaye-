@@ -48,7 +48,7 @@ addEventHandler(
         -- local query = dbQuery()
         dbExec(
             db,
-            "UPDATE accounts SET skin = ?, x = ?, y = ?, z = ?, rx = ?, ry = ?, rz = ?, money = ? WHERE username = ?",
+            "UPDATE accounts SET skin = ?, x = ?, y = ?, z = ?, rx = ?, ry = ?, rz = ?, money = ? ,online = false WHERE username = ? ",
             skin,
             x,
             y,
@@ -58,6 +58,7 @@ addEventHandler(
             rz,
             money,
             username
+            
         )
     end
 )
