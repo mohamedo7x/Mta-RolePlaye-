@@ -11,10 +11,12 @@ addEventHandler('onResourceStart' , resourceRoot , function ()
      ";host=" ..dbHost .. 
      ';port'..dbPort , dbUser , 
      dbPassword )
-    outputServerLog('\n Server Connected Sucessfuly to MYSQL \n' .. 'Host: ' .. dbHost .. '\nUser: ' .. dbUser .. '\nName: ' .. dbName .. '\nPROT: ' .. dbPort)
+     if db == false then return outputServerLog('Faild ocnnection to DB (MYSQL)') end
+     outputServerLog('\n Server Connected Sucessfuly to MYSQL \n' .. 'Host: ' .. dbHost .. '\nUser: ' .. dbUser .. '\nName: ' .. dbName .. '\nPROT: ' .. dbPort)
 end)
 
 
 function getConnect() 
     return db
 end
+

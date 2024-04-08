@@ -1,7 +1,9 @@
 local config = {
     times = 5, -- 10 times and if got falid band
-    timeBand = 3600000 -- band 1 h
+    timeBand = 3600000, -- band 1 h
+    C_hash = 'MIo33@3#?.o7x' -- generate hashToProtect Data
 }
+local GolbalTeam = createTeam('Unemployed' , 0 , 0 , 0 )
 
 local db = exports.db.getConnect()
 local collection = {}
@@ -67,7 +69,14 @@ addEventHandler(
             setPlayerMoney(client, result[1].money)
             fadeCamera(client, true)
             setCameraTarget(client)
-            setElementData(client, "username", result[1].username)
+            -- setElementData(client, "username", result[1].username)
+            local old_name = getPlayerName(client)
+            setPlayerName(client , 'O7X - '.. old_name)
+            setPlayerTeam(client , GolbalTeam)
+            
+            setElementData(client , 'username' ,tostring(config.C_hash) .. '|' .. tostring(result[1].username) , false)
+            setElementData(client , 'id' , result[1].ID, false)
+            setElementData(client , 'privilage' , result[1].privilage  ,false)
             else
             -- TODO : print it in login username is not exisit
             triggerClientEvent(client, "panal:error", resourceRoot, "USERNAME/PASSWORD")
@@ -139,9 +148,11 @@ function createAccount(username, psdw, email, serial)
         rz,
         true
     )
-    addAccount(username , psdw )
     triggerClientEvent(client, "throw:okey", resourceRoot, "Sign Up Sucessfuly")
     local play = client
+    local Q_id = dbQuery(db , 'SELECT ID FROM accounts WHERE `username` = ?' , username)
+    local id = dbPoll(Q_id , -1 )
+    local old_name = getPlayerName(play)
     setTimer(
         function()
             
@@ -152,7 +163,13 @@ function createAccount(username, psdw, email, serial)
             setPlayerMoney(play, 500)
             fadeCamera(play, true)
             setCameraTarget(play)
-            setElementData(play, "username", username)
+
+            setPlayerName(play , 'O7X - '.. old_name)
+            setPlayerTeam(play , GolbalTeam)
+            
+            setElementData(play , 'username' , tostring(config.C_hash)..'|'..tostring(username) , false)
+            setElementData(play , 'id' , tostring(config.C_hash..'|'..id[1].id), false)
+            
         end,
         2000,
         1

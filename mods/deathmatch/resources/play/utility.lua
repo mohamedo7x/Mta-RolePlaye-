@@ -19,3 +19,4 @@ function hideScreenCombonenet(status)
         showCursor(false)
     end
 end
+

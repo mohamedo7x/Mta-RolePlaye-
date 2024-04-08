@@ -26,8 +26,9 @@ addEventHandler(
     "onPlayerQuit",
     root,
     function()
-        local username = getElementData(source, "username") or false
-
+        local userData = getElementData(source, "username") or false
+        local username = userData:match("|(.-)$")
+        outputServerLog(username)
         if not username then
             outputServerLog("Failed to update account data on quit: Missing username.")
             return
@@ -35,17 +36,12 @@ addEventHandler(
 
         local x, y, z = getElementPosition(source)
 
-        if x == 0 and y == 0 and z == 0 then
-            outputServerLog("Failed to update account data on quit: Invalid position.")
-            return
-        end
 
         local rx, ry, rz = getElementRotation(source)
         local skin = getElementModel(source)
         local money = getPlayerMoney(source)
         skin = tostring(skin)
         money = tostring(money)
-        -- local query = dbQuery()
         dbExec(
             db,
             "UPDATE accounts SET skin = ?, x = ?, y = ?, z = ?, rx = ?, ry = ?, rz = ?, money = ? ,online = false WHERE username = ? ",
