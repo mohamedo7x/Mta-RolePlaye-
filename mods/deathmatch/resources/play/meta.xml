@@ -1,12 +1,10 @@
 <meta>
-
-<script  src="validation.lua" type="client" cache="false" />
-<script  src="utility.lua" type="client" />
-<script  src="c_login.lua" type="client" />
-<script  src="g_panal.lua" type="client" cache="false"/>
-<script  src="s_login.lua" type="server" />
-<script  src="server.lua" type="server" />
-
-
-
+    <info author="nohamedo7x" version="1.0" description="First version of the project"/>
+    
+    <script src="validation.lua" type="client" cache="false" priority="100" />
+    <script src="utility.lua" type="client" priority="90" />
+    <script src="c_login.lua" type="client" priority="80" />
+    <script src="g_panal.lua" type="client" cache="false" priority="70"/>
+    <script src="s_login.lua" type="server" priority="60" />
+    <script src="server.lua" type="server" priority="50" />
 </meta>

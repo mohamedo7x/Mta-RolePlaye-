@@ -69,15 +69,22 @@ addEventHandler(
             setPlayerMoney(client, result[1].money)
             fadeCamera(client, true)
             setCameraTarget(client)
-            -- setElementData(client, "username", result[1].username)
-            local old_name = getPlayerName(client)
-            setPlayerName(client , 'O7X - '.. old_name)
+
+
+            
+            local Account_toLogin = getAccount(username)
+            
+            local account_password = getAccountData(Account_toLogin , 'hashed_password')
+
             setPlayerTeam(client , GolbalTeam)
             
             setElementData(client , 'username' ,tostring(config.C_hash) .. '|' .. tostring(result[1].username) , false)
             setElementData(client , 'id' , result[1].ID, false)
             setElementData(client , 'privilage' , result[1].privilage  ,false)
-            else
+            local pl = client
+         
+            logIn(pl , Account_toLogin ,account_password )
+        else
             -- TODO : print it in login username is not exisit
             triggerClientEvent(client, "panal:error", resourceRoot, "USERNAME/PASSWORD")
 
@@ -131,6 +138,8 @@ addEventHandler(
 
 function createAccount(username, psdw, email, serial)
     local password = passwordHash(psdw, "bcrypt", {})
+    local createdAccount = addAccount(username ,password ) 
+    setAccountData(createdAccount , 'hashed_password' ,password )
     local skin = math.random(1, 70)
     dbExec(
         db,
@@ -168,8 +177,9 @@ function createAccount(username, psdw, email, serial)
             setPlayerTeam(play , GolbalTeam)
             
             setElementData(play , 'username' , tostring(config.C_hash)..'|'..tostring(username) , false)
-            setElementData(play , 'id' , tostring(config.C_hash..'|'..id[1].id), false)
-            
+            -- setElementData(play , 'id' , tostring(config.C_hash..'|'..id[1].id), false)
+            setElementData(play , 'id' ,id[1].id , false )
+            -- logIn() ERROR
         end,
         2000,
         1

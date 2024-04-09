@@ -27,12 +27,11 @@ addEventHandler(
     root,
     function()
         local userData = getElementData(source, "username") or false
-        local username = userData:match("|(.-)$")
-        outputServerLog(username)
-        if not username then
+        if not userData then
             outputServerLog("Failed to update account data on quit: Missing username.")
             return
         end
+        local username = userData:match("|(.-)$")
 
         local x, y, z = getElementPosition(source)
 
